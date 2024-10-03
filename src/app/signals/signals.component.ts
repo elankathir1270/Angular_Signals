@@ -1,4 +1,4 @@
-import { Component, DoCheck, signal } from '@angular/core';
+import { Component, computed, DoCheck, effect, signal } from '@angular/core';
 
 @Component({
   selector: 'app-signals',
@@ -9,6 +9,12 @@ export class SignalsComponent implements DoCheck {
 
   counter = signal(0);
   message = signal<string[]>([]) //signal is generic type
+  doubleCounter = computed(() => this.counter() * 2);
+
+  constructor() {
+    effect(() => console.log('effect function is called ' + this.counter()));
+    // effect function will only be activated if you use any signal in its callback function
+  }
 
   decrement(){
     this.counter.update((preValue) => preValue -1);
