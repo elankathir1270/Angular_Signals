@@ -11,7 +11,9 @@ export class SignalsComponent implements DoCheck {
   message = signal<string[]>([]) //signal is generic type
 
   decrement(){
-    this.counter
+    this.counter.update((preValue) => preValue -1);
+
+    this.message.mutate((prevMsg) => prevMsg.pop());
   }
 
   increment(){
