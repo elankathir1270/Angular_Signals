@@ -1,0 +1,22 @@
+<h2>🛒 Shopping Cart</h2>
+
+<button (click)="addProduct()">Add Laptop</button>
+<button (click)="clear()">Clear Cart</button>
+
+<ul>
+  <li *ngFor="let item of cartItems()">
+    {{ item.name }} - ₹{{ item.price }}
+    <input
+  #qtyInput
+  type="number"
+  [value]="item.quantity"
+  (input)="updateQty(item.id, +qtyInput.value)"
+    />
+    <button (click)="remove(item.id)">Remove</button>
+  </li>
+</ul>
+
+<p>Total Items: {{ totalItems() }}</p>
+<p>Total Price: ₹{{ totalPrice() }}</p>
+<p>Discount: {{ discount() }}%</p>
+<p><strong>Final Price: ₹{{ finalPrice() }}</strong></p>
